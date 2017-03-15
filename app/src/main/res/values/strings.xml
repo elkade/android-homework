@@ -2,4 +2,6 @@
     <string name="app_name">Shopping</string>
     <string name="login_button">Login</string>
     <string name="apply_button">Apply</string>
+    <string name="title_placeholder">Title</string>
+    <string name="description_placeholder">Description</string>
 </resources>
