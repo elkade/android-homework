@@ -1,7 +1,9 @@
 package com.example.lukas.homework;
 
 
-public class ShoppingItem {
+import java.io.Serializable;
+
+public class ShoppingItem implements Serializable {
     private String title;
     private String description;
     private int id = -1;

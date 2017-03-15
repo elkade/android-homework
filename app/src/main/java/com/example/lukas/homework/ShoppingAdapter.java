@@ -1,7 +1,6 @@
 package com.example.lukas.homework;
 
 import android.content.Context;
-import android.support.v7.widget.ListPopupWindow;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +21,7 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingViewHolder> {
     @Override
     public ShoppingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.layout_shopping_item, null);
+                .inflate(R.layout.layout_shopping_item, parent, false);
         ShoppingViewHolder shoppingViewHolder = new ShoppingViewHolder(view);
         return shoppingViewHolder;
     }
@@ -30,8 +29,8 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingViewHolder> {
     @Override
     public void onBindViewHolder(ShoppingViewHolder holder, int position) {
         ShoppingItem shoppingItem = list.get(position);
-        holder.mTitleView.setText(shoppingItem.getTitle());
-        holder.mDescriptionView.setText(shoppingItem.getDescription());
+        holder.bindItem(shoppingItem);
+
     }
 
     @Override

@@ -68,4 +68,26 @@ public class ShoppingItemsRepository {
             return list;
         }
     }
+    public ShoppingItem getNext(int id) {
+        try(SQLiteDatabase database = dbHelper.getReadableDatabase()) {
+            ShoppingItem item = null;
+            String[] cols = new String[]{DbHelper.SI_ID, DbHelper.SI_TITLE, DbHelper.SI_DESCRIPTION};
+            String whereClause = DbHelper.SI_ID + " > ?";
+            String[] whereArgs = new String[] {Integer.toString(id)};
+            try(Cursor cursor = database.query(true, DbHelper.SI_TABLE_NAME, cols, whereClause, whereArgs, null, null, null, "1")) {
+                if (cursor == null)
+                    return null;
+                if (cursor.moveToFirst()) {
+                    if (cursor.isAfterLast() == false) {
+                        int item_id = cursor.getInt(cursor.getColumnIndex(DbHelper.SI_ID));
+                        String title = cursor.getString(cursor.getColumnIndex(DbHelper.SI_TITLE));
+                        String description = cursor.getString(cursor.getColumnIndex(DbHelper.SI_DESCRIPTION));
+                        item = new ShoppingItem(item_id, title, description);
+                        return item;
+                    }
+                }
+            }
+            return item;
+        }
+    }
 }
