@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,10 +39,13 @@ public class MainFragment extends Fragment {
         recyclerView.setLayoutManager(linearLayoutManager);
 
         list = new ArrayList<>();
-        list.add(repo.getNext(-1));
+        ShoppingItem item = repo.getNext(-1);
+        if(item!=null)
+            list.add(item);
         shoppingAdapter = new ShoppingAdapter(list, getActivity());
         recyclerView.setAdapter(shoppingAdapter);
         setRecyclerViewScrollListener();
+        setRecyclerViewItemTouchListener();
         FloatingActionButton addButton = (FloatingActionButton) view.findViewById(R.id.add_button);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,16 +67,55 @@ public class MainFragment extends Fragment {
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
                 int totalItemCount = recyclerView.getLayoutManager().getItemCount();
-                if(list.isEmpty())return;
-                if (totalItemCount != getLastVisibleItemPosition() + 1) return;
-                ShoppingItem last = list.get(list.size()-1);
-
-                ShoppingItem item = repo.getNext(last.getId());
-                if(item==null)
+                if (totalItemCount != getLastVisibleItemPosition() + 1)
                     return;
-                list.add(item);
-                shoppingAdapter.notifyItemInserted(list.size());
+                loadNextItem();
             }
         });
+    }
+
+    private void loadNextItem() {
+        ShoppingItem item ;
+        if(list.isEmpty())
+            item = repo.getNext(-1);
+        else {
+
+            ShoppingItem last = list.get(list.size() - 1);
+
+            item = repo.getNext(last.getId());
+        }
+        if (item == null)
+            return;
+        list.add(item);
+
+        shoppingAdapter.notifyItemInserted(list.size());
+    }
+
+    private void setRecyclerViewItemTouchListener() {
+
+        //1
+        ItemTouchHelper.SimpleCallback itemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder viewHolder1) {
+                //2
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+                //3
+                int position = viewHolder.getAdapterPosition();
+                ShoppingItem item = list.get(position);
+                repo.deleteItem(item.getId());
+                list.remove(position);
+                recyclerView.getAdapter().notifyItemRemoved(position);
+                if(list.isEmpty())
+                    loadNextItem();
+            }
+        };
+
+        //4
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 }
