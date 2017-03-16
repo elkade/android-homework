@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -36,5 +37,9 @@ public class ShoppingAdapter extends RecyclerView.Adapter<ShoppingViewHolder> {
     @Override
     public int getItemCount() {
         return (list != null) ? list.size() : 0;
+    }
+
+    public void setList(ArrayList<ShoppingItem> list) {
+        this.list = list;
     }
 }

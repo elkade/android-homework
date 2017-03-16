@@ -15,7 +15,9 @@ import android.widget.EditText;
 public class EditFragment extends Fragment {
 
     private View view;
-
+    EditText editTitle;
+    EditText editDescription;
+    ShoppingItem item;
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater,
@@ -23,19 +25,32 @@ public class EditFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_edit, container, false);
         Button loginButton = (Button) view.findViewById(R.id.apply_button);
+
+        item = ((EditActivity) getActivity()).getItem();
+
+        editTitle = (EditText) view.findViewById(R.id.edit_title);
+
+        editDescription = (EditText) view.findViewById(R.id.edit_description);
+        if(item!=null){
+            editTitle.setText(item.getTitle());
+            editDescription.setText(item.getDescription());
+        }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Context context = getContext();
                 ShoppingItemsRepository repo = new ShoppingItemsRepository(context);
-
-                EditText editTitle = (EditText) view.findViewById(R.id.edit_title);
-                EditText editDescription = (EditText) view.findViewById(R.id.edit_description);
-
-                ShoppingItem shoppingItem = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString());
-                repo.insertItem(shoppingItem);
-
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                if(item == null) {
+                    item = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString());
+                    repo.insertItem(item);
+                }
+                else{
+                    item.setTitle(editTitle.getText().toString());
+                    item.setDescription(editDescription.getText().toString());
+                    repo.updateItem(item);
+                }
+                getActivity().finish();
+                //startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
         return view;

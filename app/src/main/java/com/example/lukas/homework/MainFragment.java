@@ -50,7 +50,11 @@ public class MainFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(getActivity(), EditActivity.class));
+                Intent intent = new Intent(getActivity(), EditActivity.class);
+                Bundle b = new Bundle();
+                //b.putInt("id", ); //Your id
+                intent.putExtras(b);
+                startActivity(intent);
             }
         });
 
@@ -117,5 +121,19 @@ public class MainFragment extends Fragment {
         //4
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(itemTouchCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(list.isEmpty()) {
+            ShoppingItem item = repo.getNext(-1);
+            if(item!=null)
+                list.add(item);
+        }
+        else
+            for(int i=0;i<list.size();i++)
+                list.set(i,repo.getItem(list.get(i).getId()));
+        shoppingAdapter.notifyDataSetChanged();
     }
 }
