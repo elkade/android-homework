@@ -1,5 +1,6 @@
 package com.example.lukas.homework;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -49,6 +50,11 @@ public class EditFragment extends Fragment {
                     item.setDescription(editDescription.getText().toString());
                     repo.updateItem(item);
                 }
+
+                Intent resultIntent = new Intent();
+                resultIntent.putExtra("item_id", item.getId());
+                getActivity().setResult(Activity.RESULT_OK, resultIntent);
+
                 getActivity().finish();
                 //startActivity(new Intent(getActivity(), MainActivity.class));
             }

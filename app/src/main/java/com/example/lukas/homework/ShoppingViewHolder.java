@@ -1,6 +1,7 @@
 package com.example.lukas.homework;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
@@ -51,6 +52,6 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder implements View.
         Context context = itemView.getContext();
         Intent showEditIntent = new Intent(context, EditActivity.class);
         showEditIntent.putExtra("item", item);
-        context.startActivity(showEditIntent);
+        ((Activity)context).startActivityForResult(showEditIntent, 0);
     }
 }

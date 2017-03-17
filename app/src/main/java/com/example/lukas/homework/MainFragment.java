@@ -54,7 +54,7 @@ public class MainFragment extends Fragment {
                 Bundle b = new Bundle();
                 //b.putInt("id", ); //Your id
                 intent.putExtras(b);
-                startActivity(intent);
+                startActivityForResult(intent, 1);
             }
         });
 
@@ -126,14 +126,30 @@ public class MainFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        //updateList();
+    }
+
+    public void updateList(int itemId) {
+        boolean isOnList = false;
         if(list.isEmpty()) {
             ShoppingItem item = repo.getNext(-1);
             if(item!=null)
                 list.add(item);
+            shoppingAdapter.notifyDataSetChanged();
+            return;
         }
-        else
-            for(int i=0;i<list.size();i++)
-                list.set(i,repo.getItem(list.get(i).getId()));
-        shoppingAdapter.notifyDataSetChanged();
+        for(int i=0;i<list.size();i++){
+            ShoppingItem item = list.get(i);
+            if(item.getId()!=itemId)
+                continue;
+            ShoppingItem newItem = repo.getItem(itemId);
+            item.setTitle(newItem.getTitle());
+            item.setDescription(newItem.getDescription());
+            isOnList = true;
+            shoppingAdapter.notifyItemChanged(i);
+            break;
+        }
+        if(isOnList)return;
     }
+
 }
