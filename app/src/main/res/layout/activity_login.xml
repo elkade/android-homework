@@ -13,5 +13,6 @@
 android:id="@+id/fragment_login"
 android:layout_width="match_parent"
 android:layout_height="match_parent"
-class="com.example.lukas.homework.LoginFragment"/>
+class="com.example.lukas.homework.LoginFragment"
+    tools:layout="@layout/fragment_login" />
     </FrameLayout>

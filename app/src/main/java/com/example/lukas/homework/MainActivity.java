@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        mainFragment.updateList(data.getIntExtra("item_id", -1));
+        if(data != null)
+            mainFragment.updateList(data.getIntExtra("item_id", -1));
     }
 }

@@ -48,13 +48,13 @@ public class EditFragment extends Fragment {
                 Context context = getContext();
                 ShoppingItemsRepository repo = new ShoppingItemsRepository(context);
                 if(item == null) {
-                    item = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString(), Double.parseDouble(editPrice.getText().toString()), editPhotoUrl.getText().toString());
+                    item = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString(), Double.parseDouble("0" + editPrice.getText()), editPhotoUrl.getText().toString());
                     repo.insertItem(item);
                 }
                 else{
                     item.setTitle(editTitle.getText().toString());
                     item.setDescription(editDescription.getText().toString());
-                    item.setPrice(Double.parseDouble(editPrice.getText().toString()));
+                    item.setPrice(Double.parseDouble("0" + editPrice.getText()));
                     item.setPhotoUrl(editPhotoUrl.getText().toString());
                     repo.updateItem(item);
                 }

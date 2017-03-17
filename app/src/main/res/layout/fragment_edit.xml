@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:hint="@string/photo_url_placeholder"
-        android:inputType="text" />
+        android:inputType="textUri" />
     <Button
         android:id="@+id/apply_button"
         android:text="@string/apply_button"

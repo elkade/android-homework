@@ -48,7 +48,9 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder implements View.
     }
     public void bindItem(ShoppingItem item) {
         this.item = item;
-        Picasso.with(image.getContext()).load(item.getPhotoUrl()).into(image);
+        String url = item.getPhotoUrl();
+        if(!url.equals(""))
+            Picasso.with(image.getContext()).load(url).into(image);
         mTitleView.setText(item.getTitle());
         mDescriptionView.setText(item.getDescription());
     }

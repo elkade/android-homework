@@ -7,7 +7,7 @@ import android.util.Log;
 
 public class DbHelper extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "ShoppingDb";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 4;
     public final static String SI_TABLE_NAME = "ShoppingItems";
     public final static String SI_ID = "_id";
     public final static String SI_TITLE = "title";
