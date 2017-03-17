@@ -18,6 +18,9 @@ public class EditFragment extends Fragment {
     private View view;
     EditText editTitle;
     EditText editDescription;
+    EditText editPrice;
+    EditText editPhotoUrl;
+
     ShoppingItem item;
     @Nullable
     @Override
@@ -30,11 +33,14 @@ public class EditFragment extends Fragment {
         item = ((EditActivity) getActivity()).getItem();
 
         editTitle = (EditText) view.findViewById(R.id.edit_title);
-
         editDescription = (EditText) view.findViewById(R.id.edit_description);
+        editPrice = (EditText) view.findViewById(R.id.edit_price);
+        editPhotoUrl = (EditText) view.findViewById(R.id.edit_photo_url);
         if(item!=null){
             editTitle.setText(item.getTitle());
             editDescription.setText(item.getDescription());
+            editPrice.setText(Double.toString(item.getPrice()));
+            editPhotoUrl.setText(item.getPhotoUrl());
         }
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,12 +48,14 @@ public class EditFragment extends Fragment {
                 Context context = getContext();
                 ShoppingItemsRepository repo = new ShoppingItemsRepository(context);
                 if(item == null) {
-                    item = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString());
+                    item = new ShoppingItem(editTitle.getText().toString(), editDescription.getText().toString(), Double.parseDouble(editPrice.getText().toString()), editPhotoUrl.getText().toString());
                     repo.insertItem(item);
                 }
                 else{
                     item.setTitle(editTitle.getText().toString());
                     item.setDescription(editDescription.getText().toString());
+                    item.setPrice(Double.parseDouble(editPrice.getText().toString()));
+                    item.setPhotoUrl(editPhotoUrl.getText().toString());
                     repo.updateItem(item);
                 }
 
@@ -56,7 +64,6 @@ public class EditFragment extends Fragment {
                 getActivity().setResult(Activity.RESULT_OK, resultIntent);
 
                 getActivity().finish();
-                //startActivity(new Intent(getActivity(), MainActivity.class));
             }
         });
         return view;

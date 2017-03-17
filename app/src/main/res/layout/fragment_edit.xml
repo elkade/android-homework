@@ -18,6 +18,20 @@
         android:layout_margin="8dp"
         android:hint="@string/description_placeholder"
         android:inputType="text" />
+    <EditText
+        android:id="@+id/edit_price"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/price_placeholder"
+        android:inputType="numberDecimal" />
+    <EditText
+        android:id="@+id/edit_photo_url"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:hint="@string/photo_url_placeholder"
+        android:inputType="text" />
     <Button
         android:id="@+id/apply_button"
         android:text="@string/apply_button"

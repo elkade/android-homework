@@ -4,4 +4,6 @@
     <string name="apply_button">Apply</string>
     <string name="title_placeholder">Title</string>
     <string name="description_placeholder">Description</string>
+    <string name="price_placeholder">Price</string>
+    <string name="photo_url_placeholder">Photo Url</string>
 </resources>
