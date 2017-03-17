@@ -6,6 +6,7 @@ import java.io.Serializable;
 public class ShoppingItem implements Serializable {
     private String title;
     private String description;
+    private String photoUrl = "http://viralka.pl/wp-content/uploads/2015/05/okladka.jpg";
     private int id = -1;
 
     public ShoppingItem(int id, String title, String description) {
@@ -32,5 +33,9 @@ public class ShoppingItem implements Serializable {
     }
     public int getId() {
         return id;
+    }
+
+    public String getPhotoUrl() {
+        return photoUrl;
     }
 }

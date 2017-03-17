@@ -8,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 
 public class ShoppingViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -18,12 +21,15 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder implements View.
     ImageButton deleteButton;
     ImageButton editButton;
     ShoppingItem item;
+    ImageView image;
 
     public ShoppingViewHolder(View itemView) {
         super(itemView);
         this.mTitleView = (TextView) itemView.findViewById(R.id.item_title);
         this.mDescriptionView = (TextView) itemView.findViewById(R.id.item_description);
         deleteButton = (ImageButton) itemView.findViewById(R.id.delete_button);
+        image = (ImageView)itemView.findViewById(R.id.item_image);
+
         itemView.setOnClickListener(this);
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,7 +48,7 @@ public class ShoppingViewHolder extends RecyclerView.ViewHolder implements View.
     }
     public void bindItem(ShoppingItem item) {
         this.item = item;
-        //Picasso.with(mItemImage.getContext()).load(photo.getUrl()).into(mItemImage);
+        Picasso.with(image.getContext()).load(item.getPhotoUrl()).into(image);
         mTitleView.setText(item.getTitle());
         mDescriptionView.setText(item.getDescription());
     }
