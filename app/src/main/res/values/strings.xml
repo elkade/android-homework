@@ -6,4 +6,5 @@
     <string name="description_placeholder">Description</string>
     <string name="price_placeholder">Price</string>
     <string name="photo_url_placeholder">Photo Url</string>
+    <string name="new_thingy">+</string>
 </resources>
