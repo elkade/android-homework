@@ -19,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     MainFragment mainFragment;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        getTheme().applyStyle(new Preferences(this).getFontStyle().getResId(), true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentManager supportFragmentManager = getSupportFragmentManager();

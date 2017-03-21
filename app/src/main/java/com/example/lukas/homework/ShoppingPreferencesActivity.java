@@ -9,7 +9,6 @@ public class ShoppingPreferencesActivity extends PreferenceActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getTheme().applyStyle(new Preferences(this).getFontStyle().getResId(), true);
         super.onCreate(savedInstanceState);
         Preferences prefs = new Preferences(this);
         getFragmentManager().beginTransaction().replace(android.R.id.content, new ShoppingPreferencesFragment()).commit();

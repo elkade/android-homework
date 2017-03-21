@@ -7,7 +7,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        getTheme().applyStyle(new Preferences(this).getFontStyle().getResId(), true);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
     }

@@ -57,7 +57,7 @@ public class MainFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
-
+        shoppingAdapter.notifyDataSetChanged();
         return view;
     }
 
@@ -123,12 +123,6 @@ public class MainFragment extends Fragment {
         itemTouchHelper.attachToRecyclerView(recyclerView);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        //updateList();
-    }
-
     public void updateList(int itemId) {
         boolean isOnList = false;
         if(list.isEmpty()) {
@@ -151,5 +145,9 @@ public class MainFragment extends Fragment {
         }
         if(isOnList)return;
     }
-
+    @Override
+    public void onResume() {
+        super.onResume();
+        shoppingAdapter.notifyDataSetChanged();
+    }
 }

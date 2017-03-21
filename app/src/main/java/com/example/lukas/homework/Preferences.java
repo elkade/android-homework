@@ -2,10 +2,12 @@ package com.example.lukas.homework;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
 
 public class Preferences {
-    private final static String FONT_STYLE = "FONT_STYLE";
+    private final static String FONT_SIZE = "FONT_SIZE";
+    private final static String FONT_COLOR = "FONT_COLOR";
 
     private final Context context;
 
@@ -21,12 +23,27 @@ public class Preferences {
         return open().edit();
     }
 
-    public FontStyle getFontStyle() {
-        String val = open().getString(FONT_STYLE, FontStyle.Large.name());
-        return FontStyle.valueOf(val);
+
+    public int getFontColor(){
+        String val = open().getString(FONT_COLOR, "2");
+        if(val.equals("1"))
+            return Color.RED;
+        if(val.equals("2"))
+            return Color.BLACK;
+        if(val.equals("3"))
+            return Color.GREEN;
+        return Color.CYAN;
     }
 
-    public void setFontStyle(FontStyle style) {
-        edit().putString(FONT_STYLE, style.name()).commit();
+    public int getFontSize(){
+        String val = open().getString(FONT_SIZE, "2");
+        if(val.equals("1"))
+            return 18;
+        if(val.equals("2"))
+            return 22;
+        if(val.equals("3"))
+            return 30;
+        return 40;
     }
+
 }
