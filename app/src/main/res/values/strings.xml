@@ -7,4 +7,6 @@
     <string name="price_placeholder">Price</string>
     <string name="photo_url_placeholder">Photo Url</string>
     <string name="new_thingy">+</string>
+    <string name="tap_item_to_edit">Tap item to edit</string>
+    <string name="slide_item_to_remove">Slide item to remove</string>
 </resources>

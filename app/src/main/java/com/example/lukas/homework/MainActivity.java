@@ -22,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FragmentManager supportFragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
-        mainFragment = new MainFragment();
-        fragmentTransaction.add(R.id.main_container, mainFragment);
-        fragmentTransaction.commit();
+//        FragmentTransaction fragmentTransaction = supportFragmentManager.beginTransaction();
+//        mainFragment = new MainFragment();
+//        fragmentTransaction.add(R.id.main_container, mainFragment);
+//        fragmentTransaction.commit();
+        mainFragment = (MainFragment) supportFragmentManager.findFragmentById(R.id.fragment_main);
+
     }
 
     @Override
