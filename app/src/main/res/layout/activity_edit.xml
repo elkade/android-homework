@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_edit"
@@ -16,4 +16,4 @@
         android:layout_height="wrap_content"
         class="com.example.lukas.homework.EditFragment"
         tools:layout="@layout/fragment_edit" />
-</FrameLayout>
+</ScrollView >
